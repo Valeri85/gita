@@ -1,0 +1,283 @@
+/* 
+	1. Root 
+	2. Reset
+	3. Header
+		3.1. Header Burger
+*/
+
+/* ========== 1. Root ========== */
+
+:root {
+	/* Font Sizes */
+	--fs-body: clamp(1.6rem, 1.5091rem + 0.2424vw, 1.8rem);
+
+	/* Font Weights */
+	--fw-normal: 400;
+	--fw-bold: 700;
+
+	/* Background Colors */
+	--clr-primary-400: hsl(278, 68%, 11%);
+	--clr-primary-100: hsl(0, 0%, 90%);
+	--clr-secondary-400: hsl(207, 91%, 13%);
+
+	/* Hovers */
+	--clr-hover-400: hsl(60, 100%, 75%);
+
+	/* Shadows */
+	--shadow: 0 7.5px 7.5px 0 hsl(0 0% 0% / 0.5);
+
+	/* Responsive Paddings */
+	--padding: clamp(1em, 0.7143rem + 0.8929vw, 2em);
+
+	/* Border Radiuses */
+	/* --border-radius-400: 0.6em; */
+
+	/* Animations */
+	/* Duration */
+	--animation-duration-100: 150ms;
+	--animation-duration-400: 500ms;
+	--animation-duration-500: 700ms;
+	/* Delay */
+	--animation-delay-400: 350ms;
+}
+
+/* ========== 2. Reset ========== */
+
+/* Set core defaults */
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font: inherit;
+	/* Avoid text overflows */
+	overflow-wrap: break-word;
+}
+
+/* Set core html and body defaults */
+html,
+body {
+	height: 100%;
+}
+
+/* Set core root defaults */
+html {
+	font-weight: var(--fw-normal);
+	font-size: 62.5%;
+	/*
+    1rem = 16px
+    1rem * 62.5% = 10px
+    If all font sizes = 62.5% than rem * 0.625
+    1rem = 10px; 0.1rem = 1px; 2.4rem = 24px...      
+    */
+	scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+	width: 100%;
+	font-size: var(--fs-body);
+	line-height: 1.6;
+	text-rendering: optimizeSpeed;
+	/* Improve text rendering */
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Make images easier to work with */
+img,
+picture,
+video,
+canvas,
+svg {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+/* Remove default styles from links and abbreviation */
+a,
+abbr {
+	text-decoration: none;
+	color: var(--clr-primary-100);
+}
+
+/* Remove list styles on ul, ol elements */
+li::marker {
+	content: '';
+}
+@supports not selector(::marker) {
+	ul,
+	ol {
+		list-style-type: none;
+	}
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+	html:focus-within {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+/* =========== 3. Header =========  */
+
+.header {
+	position: fixed;
+	width: 100%;
+	padding: var(--padding);
+	background-color: var(--clr-primary-400);
+	font-weight: var(--fw-bold);
+	box-shadow: var(--shadow);
+}
+
+/* 3.1 Header Menu */
+
+.header__menu {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	gap: 1.25em;
+	position: absolute;
+	inset: 100% 0 auto 0;
+	padding-block: 1em;
+	background-color: var(--clr-primary-400);
+	transform: scale(1, 0);
+	transform-origin: top;
+	transition: transform var(--animation-duration-400) ease;
+}
+
+.header__menu.show {
+	transform: scale(1, 1);
+	box-shadow: var(--shadow);
+}
+
+.menu__link {
+	text-transform: uppercase;
+	opacity: 0;
+	transition: opacity var(--animation-duration-100) ease-in-out,
+		color var(--animation-duration-400) ease-in-out;
+}
+
+.menu__link:hover {
+	color: var(--clr-hover-400);
+}
+
+.header__menu.show .menu__link {
+	opacity: 1;
+	transition: opacity var(--animation-duration-500) ease
+		var(--animation-delay);
+}
+
+/* 3.2 Header Burger */
+
+.header__burger {
+	--burger-size: 1.6em;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	inset: var(--padding) var(--padding) auto auto;
+	width: var(--burger-size);
+	height: var(--burger-size);
+}
+
+.burger__line {
+	fill: none;
+	stroke: var(--clr-primary-400);
+	stroke-width: 6;
+	transition: stroke-dasharray var(--animation-duration-500)
+			cubic-bezier(0.4, 0, 0.2, 1),
+		stroke-dashoffset var(--animation-duration-500)
+			cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.burger__line--1 {
+	stroke-dasharray: 60 207;
+	stroke-width: 6;
+}
+.burger__line--2 {
+	stroke-dasharray: 60 60;
+	stroke-width: 6;
+}
+.burger__line--3 {
+	stroke-dasharray: 60 207;
+	stroke-width: 6;
+}
+
+.opened .burger__line--1 {
+	stroke-dasharray: 90 207;
+	stroke-dashoffset: -134;
+	stroke-width: 6;
+}
+.opened .burger__line--2 {
+	stroke-dasharray: 1 60;
+	stroke-dashoffset: -30;
+	stroke-width: 6;
+}
+.opened .burger__line--3 {
+	stroke-dasharray: 90 207;
+	stroke-dashoffset: -134;
+	stroke-width: 6;
+}
+
+/* ========== Main ========== */
+main {
+	padding: var(--padding);
+}
+
+/* ========== Responsive ========== */
+/* Header */
+
+/* Mobile */
+@media screen and (min-width: 480px) {
+	.header__navbar {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.header__menu {
+		position: static;
+		flex-direction: row;
+		padding-block: 0;
+	}
+
+	.header__burger {
+		display: none;
+	}
+
+	.header__menu {
+		transform: scale(1, 1);
+	}
+
+	.menu__link {
+		opacity: 1;
+	}
+}
+
+/* Ipad */
+@media screen and (min-width: 768px) {
+}
+
+/* Small Screen */
+@media screen and (min-width: 1024px) {
+}
+
+/* Large Screen */
+@media screen and (min-width: 1200px) {
+}
+
+/* Extra Large Screen */
+@media screen and (min-width: 1201px) {
+}
