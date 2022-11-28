@@ -19,7 +19,7 @@
 
 	<body>
 		<!-- Header Start -->
-		<header class="header">
+		<header class="header" id="header">
 			<!-- Navigation Start -->
 			<nav class="header__navbar">
 				<!-- Logo Start -->
@@ -67,7 +67,37 @@
 			</nav>
 			<!-- Navigation End -->
 		</header>
-		<main>
+		<!-- Main Strat -->
+		<main class="main" id="main">
+			<!-- Search Section Start -->
+			<section class="main__search" id="main__search">
+				<!-- Main Title Start -->
+				<h1 class="main__title">
+					Welcome<span class="visually-hidden"
+						>on MovieDB website</span
+					>
+				</h1>
+				<!-- Main Title End -->
+				<!-- Search Field Start -->
+				<form class="search__form">
+					<fieldset class="search__fieldset">
+						<legend>
+							Millions of movies, TV shows and people to discover.
+							Explore now.
+						</legend>
+						<label class="visually-hidden" for="search"
+							>Search for a movie, tv show, person...</label
+						>
+						<input
+							id="search"
+							type="search"
+							placeholder="Search for a movie, tv show, person..."
+						/>
+					</fieldset>
+				</form>
+				<!-- Search Field End -->
+			</section>
+			<!-- Search Section End -->
 			Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam id
 			hic reprehenderit tempore, aliquam, distinctio dolorum, quod nisi
 			aspernatur similique porro voluptatem! Voluptates nulla debitis esse
@@ -128,5 +158,6 @@
 			odit quod neque ipsum! Commodi repellendus error eius fugit
 			consequuntur eveniet veritatis qui nihil, eos cumque.
 		</main>
+		<!-- Main End -->
 	</body>
 </html>

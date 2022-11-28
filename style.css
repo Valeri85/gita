@@ -2,7 +2,10 @@
 	1. Root 
 	2. Reset
 	3. Header
+	3. Header
 		3.1. Header Burger
+		3.2. Header Menu
+	4. Main
 */
 
 /* ========== 1. Root ========== */
@@ -16,8 +19,9 @@
 	--fw-bold: 700;
 
 	/* Background Colors */
-	--clr-primary-400: hsl(278, 68%, 11%);
 	--clr-primary-100: hsl(0, 0%, 90%);
+	--clr-primary-300: hsl(201, 96%, 20%);
+	--clr-primary-400: hsl(278, 68%, 11%);
 	--clr-secondary-400: hsl(207, 91%, 13%);
 
 	/* Hovers */
@@ -129,6 +133,22 @@ li::marker {
 	}
 }
 
+/* =========== 3. Utils =========  */
+
+/* Accessibility */
+
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: 0;
+}
+
 /* =========== 3. Header =========  */
 
 .header {
@@ -140,46 +160,7 @@ li::marker {
 	box-shadow: var(--shadow);
 }
 
-/* 3.1 Header Menu */
-
-.header__menu {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	gap: 1.25em;
-	position: absolute;
-	inset: 100% 0 auto 0;
-	padding-block: 1em;
-	background-color: var(--clr-primary-400);
-	transform: scale(1, 0);
-	transform-origin: top;
-	transition: transform var(--animation-duration-400) ease;
-}
-
-.header__menu.show {
-	transform: scale(1, 1);
-	box-shadow: var(--shadow);
-}
-
-.menu__link {
-	text-transform: uppercase;
-	opacity: 0;
-	transition: opacity var(--animation-duration-100) ease-in-out,
-		color var(--animation-duration-400) ease-in-out;
-}
-
-.menu__link:hover {
-	color: var(--clr-hover-400);
-}
-
-.header__menu.show .menu__link {
-	opacity: 1;
-	transition: opacity var(--animation-duration-500) ease
-		var(--animation-delay);
-}
-
-/* 3.2 Header Burger */
+/* 3.1 Header Burger */
 
 .header__burger {
 	--burger-size: 1.6em;
@@ -232,9 +213,54 @@ li::marker {
 	stroke-width: 6;
 }
 
-/* ========== Main ========== */
-main {
-	padding: var(--padding);
+/* 3.2 Header Menu */
+
+.header__menu {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	gap: 1.25em;
+	position: absolute;
+	inset: calc(100% - 1px) -1px auto -1px;
+	padding-block: 1em;
+	background-color: var(--clr-primary-400);
+	transform: scale(1, 0);
+	transform-origin: top;
+	transition: transform var(--animation-duration-400) ease;
+}
+
+.header__menu.show {
+	transform: scale(1, 1);
+	box-shadow: var(--shadow);
+}
+
+.menu__link {
+	text-transform: uppercase;
+	opacity: 0;
+	transition: opacity var(--animation-duration-100) ease-in-out,
+		color var(--clr-hover-400) ease-in-out;
+}
+
+.menu__link:hover {
+	color: var(--clr-hover-400);
+}
+
+.header__menu.show .menu__link {
+	opacity: 1;
+	transition: opacity var(--animation-duration-500) ease
+		var(--animation-delay-400);
+}
+
+/* ========== 4. Main ========== */
+.main {
+	padding: 0 var(--padding);
+}
+
+.main__search {
+	margin-inline: calc(var(--padding) * -1);
+	padding: 3em;
+	background-color: var(--clr-primary-300);
 }
 
 /* ========== Responsive ========== */
