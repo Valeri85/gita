@@ -1,11 +1,16 @@
 /* 
 	1. Root 
 	2. Reset
-	3. Header
-	3. Header
-		3.1. Header Burger
-		3.2. Header Menu
-	4. Main
+	3. Utils
+		3.1 Accessibility
+	4. Animations
+		4.1 Navigation Menu
+	5. Header
+		5.1. Header Burger
+		5.2. Header Menu
+	6. Main
+
+	Responsive
 */
 
 /* ========== 1. Root ========== */
@@ -135,21 +140,40 @@ li::marker {
 
 /* =========== 3. Utils =========  */
 
-/* Accessibility */
+/* 3.1 Accessibility */
 
 .visually-hidden {
 	position: absolute;
 	width: 1px;
 	height: 1px;
-	margin: -1px;
-	padding: 0;
 	overflow: hidden;
-	clip: rect(0, 0, 0, 0);
 	white-space: nowrap;
-	border-width: 0;
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+}
+/* =========== 4. Animations =========  */
+
+/* 4.1 Navigation Menu */
+
+@keyframes openNavMenu {
+	0% {
+		transform: scale(1, 1);
+	}
+	100% {
+		transform: scale(1, 0);
+	}
 }
 
-/* =========== 3. Header =========  */
+@keyframes closeNavMenu {
+	0% {
+		transform: scale(1, 0);
+	}
+	100% {
+		transform: scale(1, 1);
+	}
+}
+
+/* =========== 5. Header =========  */
 
 .header {
 	position: fixed;
@@ -160,7 +184,7 @@ li::marker {
 	box-shadow: var(--shadow);
 }
 
-/* 3.1 Header Burger */
+/* 5.1 Header Burger */
 
 .header__burger {
 	--burger-size: 1.6em;
@@ -197,23 +221,23 @@ li::marker {
 	stroke-width: 6;
 }
 
-.opened .burger__line--1 {
+.header__burger[aria-expanded='true'] .burger__line--1 {
 	stroke-dasharray: 90 207;
 	stroke-dashoffset: -134;
 	stroke-width: 6;
 }
-.opened .burger__line--2 {
+.header__burger[aria-expanded='true'] .burger__line--2 {
 	stroke-dasharray: 1 60;
 	stroke-dashoffset: -30;
 	stroke-width: 6;
 }
-.opened .burger__line--3 {
+.header__burger[aria-expanded='true'] .burger__line--3 {
 	stroke-dasharray: 90 207;
 	stroke-dashoffset: -134;
 	stroke-width: 6;
 }
 
-/* 3.2 Header Menu */
+/* 5.2 Header Menu */
 
 .header__menu {
 	display: flex;
@@ -225,34 +249,40 @@ li::marker {
 	inset: calc(100% - 1px) -1px auto -1px;
 	padding-block: 1em;
 	background-color: var(--clr-primary-400);
-	transform: scale(1, 0);
 	transform-origin: top;
-	transition: transform var(--animation-duration-400) ease;
 }
 
-.header__menu.show {
-	transform: scale(1, 1);
+.header__menu[data-state='opened'] {
+	animation: closeNavMenu var(--animation-duration-500) ease-in-out forwards;
 	box-shadow: var(--shadow);
+}
+.header__menu[data-state='closing'] {
+	animation: openNavMenu var(--animation-duration-500) ease-in-out forwards;
+	box-shadow: var(--shadow);
+}
+.header__menu[data-state='closed'] {
+	display: none;
 }
 
 .menu__link {
 	text-transform: uppercase;
 	opacity: 0;
-	transition: opacity var(--animation-duration-100) ease-in-out,
-		color var(--clr-hover-400) ease-in-out;
+	transition: opacity var(--animation-duration-500) ease-in-out,
+		color var(--animation-duration-500) ease-in-out;
 }
 
 .menu__link:hover {
 	color: var(--clr-hover-400);
 }
 
-.header__menu.show .menu__link {
+.header__menu[data-state='opened'] .menu__link {
 	opacity: 1;
 	transition: opacity var(--animation-duration-500) ease
-		var(--animation-delay-400);
+		var(--animation-delay-500);
 }
 
-/* ========== 4. Main ========== */
+/* ========== 6. Main ========== */
+
 .main {
 	padding: 0 var(--padding);
 }
@@ -261,13 +291,36 @@ li::marker {
 	margin-inline: calc(var(--padding) * -1);
 	padding: 3em;
 	background-color: var(--clr-primary-300);
+	color: var(--clr-primary-100);
+}
+
+.main__title {
+	font-size: 4.5rem;
+}
+
+.search__form {
+	margin-top: 1em;
+}
+
+fieldset {
+	border: 0;
+}
+
+.search {
+	width: 40%;
+	margin-top: 1em;
+	padding: 0.5em 1.5em;
+	border: 0;
+	border-radius: 50px;
+	margin-inline: auto;
 }
 
 /* ========== Responsive ========== */
-/* Header */
 
 /* Mobile */
 @media screen and (min-width: 480px) {
+	/* Header */
+
 	.header__navbar {
 		display: flex;
 		justify-content: space-between;

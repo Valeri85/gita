@@ -21,12 +21,18 @@
 		<!-- Header Start -->
 		<header class="header" id="header">
 			<!-- Navigation Start -->
-			<nav class="header__navbar">
+			<nav class="header__navbar" aria-label="primary-navigation">
 				<!-- Logo Start -->
 				<a class="header__logo" href="./index.html">MovieDB</a>
 				<!-- Logo End -->
+
 				<!-- Burger Start -->
-				<button class="header__burger" aria-label="main menu button">
+				<button
+					class="header__burger"
+					aria-label="Primary Menu"
+					aria-expanded="false"
+					aria-controls="primary-navigation-menu"
+				>
 					<svg
 						class="burger__icon"
 						viewBox="5 5 90 90"
@@ -49,8 +55,13 @@
 					</svg>
 				</button>
 				<!-- Burger End -->
+
 				<!-- Menu Start -->
-				<ul class="header__menu" role="list">
+				<ul
+					class="header__menu"
+					id="primary-navigation-menu"
+					data-state="closed"
+				>
 					<li class="menu__item">
 						<a class="menu__link" href="#./movies.html">Movies</a>
 					</li>
@@ -67,6 +78,7 @@
 			</nav>
 			<!-- Navigation End -->
 		</header>
+
 		<!-- Main Strat -->
 		<main class="main" id="main">
 			<!-- Search Section Start -->
@@ -78,6 +90,7 @@
 					>
 				</h1>
 				<!-- Main Title End -->
+
 				<!-- Search Field Start -->
 				<form class="search__form">
 					<fieldset class="search__fieldset">
@@ -89,6 +102,7 @@
 							>Search for a movie, tv show, person...</label
 						>
 						<input
+							class="search"
 							id="search"
 							type="search"
 							placeholder="Search for a movie, tv show, person..."
@@ -98,65 +112,12 @@
 				<!-- Search Field End -->
 			</section>
 			<!-- Search Section End -->
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam id
-			hic reprehenderit tempore, aliquam, distinctio dolorum, quod nisi
-			aspernatur similique porro voluptatem! Voluptates nulla debitis esse
-			accusantium quos soluta magni reiciendis corrupti tempora natus
-			voluptatem, voluptatum, tenetur fuga voluptatibus similique. Aut est
-			culpa, in pariatur tempore aliquid quae enim quasi similique
-			necessitatibus architecto labore sed soluta corrupti ut facere,
-			nostrum ab eveniet mollitia consectetur obcaecati commodi! Quas
-			maiores eius repudiandae eveniet, vel delectus quasi dolorem
-			veritatis praesentium architecto illum reiciendis rem voluptatem
-			excepturi laborum tempore consequuntur asperiores nobis velit amet
-			debitis minus non, doloribus quod. Ipsa eius, consequatur magni
-			culpa nihil tempore porro accusamus explicabo neque quae quidem
-			veniam dignissimos deleniti provident quia earum impedit aliquid ab
-			consequuntur voluptatem dolores aut! Neque inventore odio quos quis,
-			dicta sint, non nemo facere, aspernatur quasi magnam repudiandae!
-			Doloremque quidem aliquam culpa veniam modi quaerat qui cupiditate
-			rerum eius. Ullam iste ipsa minima nam, ratione debitis, excepturi,
-			quia asperiores cumque unde sunt? Necessitatibus nam fuga repellat
-			iste et amet! Qui delectus repellat, modi non corporis cupiditate,
-			consequatur, minima vitae inventore nemo dolorem totam. Consequatur
-			ex sunt nam atque veritatis dolorum delectus, excepturi eos
-			assumenda corporis iure ipsam. Voluptatibus a magnam excepturi quae
-			dicta deleniti nihil recusandae assumenda pariatur! Natus eos
-			temporibus voluptates earum voluptate cupiditate sint veniam
-			possimus? Beatae nisi debitis facere pariatur odio ratione corrupti
-			natus veritatis, ut iste similique porro tenetur repellendus nihil
-			culpa sit voluptas, soluta velit distinctio deserunt, ipsum earum.
-			Porro exercitationem nisi esse. Alias excepturi atque necessitatibus
-			reiciendis? Culpa repudiandae accusantium nihil dolor consequatur,
-			placeat nesciunt ducimus qui facere soluta iure cumque, aliquid
-			fugiat harum voluptates quod asperiores hic fugit ipsum distinctio
-			velit iste sint! Fugiat maxime magni quisquam non sapiente omnis.
-			Necessitatibus dolorum optio omnis voluptatum magni ea natus neque
-			dolor facilis labore! Cupiditate veritatis explicabo eum porro
-			inventore! Quod molestiae, hic, provident magni animi quibusdam
-			suscipit repellendus illo beatae sunt voluptatibus aliquid, qui esse
-			tempore non culpa porro enim vero exercitationem ipsa eaque vel
-			error fugiat? Dolore est natus, nihil, nam maxime exercitationem
-			consequuntur provident quos inventore nisi quia repellendus, culpa
-			asperiores facilis explicabo. Tempora quis quae doloremque fugiat
-			iste harum laudantium porro laboriosam iusto repudiandae expedita
-			sapiente ad temporibus, cumque, omnis, tempore nam mollitia.
-			Cupiditate aspernatur minus impedit, odio eveniet asperiores illo
-			nulla, nemo architecto dolores optio quas quam dolorem inventore
-			tempore aliquam nostrum sequi repellat laudantium facilis earum.
-			Soluta minima, voluptatem magnam quo hic illo dolores impedit
-			dolorum quos adipisci cumque dolore earum nihil, pariatur
-			accusantium nemo. Provident molestiae reiciendis ducimus voluptas
-			aliquid, maxime doloribus blanditiis consectetur praesentium aliquam
-			hic exercitationem magni assumenda sed facere? Quibusdam voluptate
-			dolores accusamus ullam deserunt pariatur eligendi et, assumenda
-			enim aspernatur deleniti alias, blanditiis nam qui eos aut suscipit,
-			labore dolor quasi ratione corporis natus asperiores dicta
-			distinctio? Delectus aperiam velit nemo repudiandae soluta, ipsa
-			neque impedit esse adipisci. Voluptates blanditiis facilis quam
-			inventore in at quos, provident reiciendis iusto sequi voluptatum
-			odit quod neque ipsum! Commodi repellendus error eius fugit
-			consequuntur eveniet veritatis qui nihil, eos cumque.
+
+			<!-- Movies Tabs Start -->
+			<section class="main__movies">
+				
+			</section>
+			<!-- Movies Tabs End -->
 		</main>
 		<!-- Main End -->
 	</body>

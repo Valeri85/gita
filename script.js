@@ -8,17 +8,29 @@ main.style.paddingTop = `${headerHeight}px`;
 /*------------------------------------------------------------------------------*/
 
 // Burger Menu
-const burger = header.querySelector('.header__burger');
-const menu = header.querySelector('.header__menu');
+const headerBurgerButton = header.querySelector('.header__burger');
+const headerNavMenu = header.querySelector('.header__menu');
 
-burger.addEventListener('click', () => {
-	burger.classList.toggle('opened');
-
-	burger.classList.contains('opened')
-		? burger.setAttribute('aria-expanded', 'true')
-		: burger.setAttribute('aria-expanded', 'false');
-
-	menu.classList.toggle('show');
+headerBurgerButton.addEventListener('click', () => {
+	const isOpened =
+		headerBurgerButton.getAttribute('aria-expanded') === 'true';
+	isOpened ? closeNavMenu() : openNavMenu();
 });
+
+function openNavMenu() {
+	headerBurgerButton.setAttribute('aria-expanded', 'true');
+	headerNavMenu.setAttribute('data-state', 'opened');
+}
+
+function closeNavMenu() {
+	headerBurgerButton.setAttribute('aria-expanded', 'false');
+	headerNavMenu.setAttribute('data-state', 'closing');
+
+	headerNavMenu.addEventListener(
+		'animationend',
+		() => headerNavMenu.setAttribute('data-state', 'closed'),
+		{ once: true }
+	);
+}
 
 /*------------------------------------------------------------------------------*/
