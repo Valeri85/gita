@@ -29,25 +29,17 @@
 				<!-- Burger Start -->
 				<button
 					class="header__burger"
+					id="header-burger"
 					aria-label="Primary Menu"
 					aria-expanded="false"
 					aria-controls="primary-navigation-menu"
 				>
-					<svg
-						class="burger__icon"
-						viewBox="5 5 90 90"
-						aria-hidden="true"
-						focusable="false"
-						role="image"
-					>
+					<svg class="burger__icon" viewBox="5 5 90 90" aria-hidden="true" focusable="false" role="image">
 						<path
 							class="burger__line burger__line--1"
 							d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058"
 						/>
-						<path
-							class="burger__line burger__line--2"
-							d="M 20,50 H 80"
-						/>
+						<path class="burger__line burger__line--2" d="M 20,50 H 80" />
 						<path
 							class="burger__line burger__line--3"
 							d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942"
@@ -57,18 +49,12 @@
 				<!-- Burger End -->
 
 				<!-- Menu Start -->
-				<ul
-					class="header__menu"
-					id="primary-navigation-menu"
-					data-state="closed"
-				>
+				<ul class="header__menu" id="primary-navigation-menu" data-state="closed">
 					<li class="menu__item">
 						<a class="menu__link" href="#./movies.html">Movies</a>
 					</li>
 					<li class="menu__item">
-						<a class="menu__link" href="#./tv-shows.html"
-							>TV Shows</a
-						>
+						<a class="menu__link" href="#./tv-shows.html">TV Shows</a>
 					</li>
 					<li class="menu__item">
 						<a class="menu__link" href="#./people.html">People</a>
@@ -79,46 +65,83 @@
 			<!-- Navigation End -->
 		</header>
 
+		<!-- ------------------------------------------------------------------------------ -->
+
 		<!-- Main Strat -->
-		<main class="main" id="main">
+		<main class="movies-page" id="movies-page">
 			<!-- Search Section Start -->
-			<section class="main__search" id="main__search">
+			<section class="movies-page__search-section">
 				<!-- Main Title Start -->
-				<h1 class="main__title">
-					Welcome<span class="visually-hidden"
-						>on MovieDB website</span
-					>
-				</h1>
+				<h1 class="movies-page__title">Welcome<span class="visually-hidden">on MovieDB website</span></h1>
 				<!-- Main Title End -->
 
 				<!-- Search Field Start -->
-				<form class="search__form">
-					<fieldset class="search__fieldset">
-						<legend>
-							Millions of movies, TV shows and people to discover.
-							Explore now.
-						</legend>
-						<label class="visually-hidden" for="search"
-							>Search for a movie, tv show, person...</label
-						>
+				<form class="movies-page__form" id="movies-form">
+					<fieldset class="form__fieldset">
+						<legend>Millions of movies, TV shows and people to discover. Explore now.</legend>
+						<label class="visually-hidden" for="search">Search for a movie, tv show, person...</label>
 						<input
-							class="search"
-							id="search"
+							class="form__search"
+							id="search-input"
 							type="search"
 							placeholder="Search for a movie, tv show, person..."
 						/>
 					</fieldset>
 				</form>
 				<!-- Search Field End -->
+
+				<!-- Search Results Start -->
+				<ul></ul>
+				<!-- Search Results End -->
 			</section>
 			<!-- Search Section End -->
 
 			<!-- Movies Tabs Start -->
-			<section class="main__movies">
-				
+			<section class="movies-page__categories">
+				<!-- Tabs Container Start -->
+				<div class="categories__tabs" id="categories-tabs">
+					<button class="categories__tab" id="categories-tab" data-tab="1" data-active-tab="true">Top Rated</button>
+					<button class="categories__tab" id="categories-tab" data-tab="2">Upcoming Movies</button>
+					<button class="categories__tab" id="categories-tab" data-tab="3">What's Popular</button>
+				</div>
+				<!-- Tabs Container End -->
+
+				<!-- Tab 1 Content Start -->
+				<ul class="movies__list movies__list--1" id="movies-list" data-active-list="true">
+					<!-- <li class="movies__list-item">
+						<article class="movie__card">
+							<small class="movie__budge">Vote%</small>
+							<img
+								class="movie-poster"
+								src="https://react-moviedb-flame.vercel.app/_next/image?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw300%2Fsv1xJUazXeYqALzczSZ3O6nkH75.jpg&w=1920&q=75"
+								alt=""
+							/>
+							<a class="movie__link" href="#" aria-label="Go to Movie Details"></a>
+							<div class="movie__content">
+								<h2 class="movie__title">Black Panther: Wakanda Forever</h2>
+								<time class="movie__date" datetime="Nov 9, 2022">Nov 9, 2022</time>
+							</div>
+						</article>
+					</li> -->
+				</ul>
+				<!-- Tab 1 Content End -->
+
+				<!-- Tab 2 Content Start -->
+				<ul class="movies__list movies__list--2" id="movies-list"></ul>
+				<!-- Tab 2 Content End -->
+
+				<!-- Tab 3 Content Start -->
+				<ul class="movies__list movies__list--3" id="movies-list"></ul>
+				<!-- Tab 3 Content End -->
 			</section>
 			<!-- Movies Tabs End -->
 		</main>
 		<!-- Main End -->
+
+		<!-- ------------------------------------------------------------------------------ -->
+
+		<!-- Footer Start -->
+		<footer class="footer"></footer>
+		<!-- Footer End -->
 	</body>
 </html>

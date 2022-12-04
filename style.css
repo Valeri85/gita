@@ -9,7 +9,10 @@
 		5.1. Header Burger
 		5.2. Header Menu
 	6. Main
-
+		6.1 Search
+		6.2 Search Form
+		6.3 Tabs
+		6.4 Movie Card
 	Responsive
 */
 
@@ -27,7 +30,8 @@
 	--clr-primary-100: hsl(0, 0%, 90%);
 	--clr-primary-300: hsl(201, 96%, 20%);
 	--clr-primary-400: hsl(278, 68%, 11%);
-	--clr-secondary-400: hsl(207, 91%, 13%);
+
+	--clr-secondary-200: hsl(60, 100%, 45%);
 
 	/* Hovers */
 	--clr-hover-400: hsl(60, 100%, 75%);
@@ -182,6 +186,7 @@ li::marker {
 	background-color: var(--clr-primary-400);
 	font-weight: var(--fw-bold);
 	box-shadow: var(--shadow);
+	z-index: 2;
 }
 
 /* 5.1 Header Burger */
@@ -202,10 +207,8 @@ li::marker {
 	fill: none;
 	stroke: var(--clr-primary-400);
 	stroke-width: 6;
-	transition: stroke-dasharray var(--animation-duration-500)
-			cubic-bezier(0.4, 0, 0.2, 1),
-		stroke-dashoffset var(--animation-duration-500)
-			cubic-bezier(0.4, 0, 0.2, 1);
+	transition: stroke-dasharray var(--animation-duration-500) cubic-bezier(0.4, 0, 0.2, 1),
+		stroke-dashoffset var(--animation-duration-500) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .burger__line--1 {
@@ -267,8 +270,7 @@ li::marker {
 .menu__link {
 	text-transform: uppercase;
 	opacity: 0;
-	transition: opacity var(--animation-duration-500) ease-in-out,
-		color var(--animation-duration-500) ease-in-out;
+	transition: opacity var(--animation-duration-500) ease-in-out, color var(--animation-duration-500) ease-in-out;
 }
 
 .menu__link:hover {
@@ -277,42 +279,125 @@ li::marker {
 
 .header__menu[data-state='opened'] .menu__link {
 	opacity: 1;
-	transition: opacity var(--animation-duration-500) ease
-		var(--animation-delay-500);
+	transition: opacity var(--animation-duration-500) ease var(--animation-delay-500);
 }
 
 /* ========== 6. Main ========== */
 
-.main {
+.movies-page {
 	padding: 0 var(--padding);
 }
 
-.main__search {
+/* 6.1 Search */
+
+.movies-page__search-section {
+	display: grid;
+	place-content: center;
 	margin-inline: calc(var(--padding) * -1);
 	padding: 3em;
 	background-color: var(--clr-primary-300);
 	color: var(--clr-primary-100);
 }
 
-.main__title {
+.movies-page__title {
 	font-size: 4.5rem;
 }
 
-.search__form {
+/* 6.2 Search Form */
+
+.movies-page__form {
 	margin-top: 1em;
 }
 
-fieldset {
+.form__fieldset {
+	display: flex;
 	border: 0;
 }
 
-.search {
-	width: 40%;
+.form__search {
 	margin-top: 1em;
+	flex-basis: 100%;
 	padding: 0.5em 1.5em;
 	border: 0;
 	border-radius: 50px;
-	margin-inline: auto;
+}
+
+/* 6.3 Tabs */
+
+.movies-page__categories {
+	display: grid;
+	place-content: center;
+	padding-block: 4em;
+}
+
+.categories__tabs {
+	display: flex;
+	place-content: center;
+	gap: 1em;
+}
+
+.categories__tab {
+	display: inline-block;
+	padding: 0.75em 5em;
+	background-color: var(--clr-primary-300);
+	border: 0;
+	border-radius: 10em;
+	color: var(--clr-primary-100);
+	transition: transform var(--animation-duration-400);
+	cursor: pointer;
+}
+
+.categories__tab[data-active-tab='true'] {
+	transform: translateY(-20%);
+}
+
+.movies__list {
+	display: none;
+}
+
+.movies__list[data-active-list='true'] {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 1em;
+	margin-top: 2em;
+	border: 1px solid red;
+}
+
+/* 6.4 Movie Card */
+
+.movie__card {
+	position: relative;
+	border-radius: 0.5em;
+	max-width: 300px;
+	overflow: hidden;
+}
+
+.movie__budge {
+	position: absolute;
+	inset: 0.5em auto auto 0.5em;
+	padding: 0.25em 0.5em;
+	background-color: var(--clr-secondary-200);
+	border-radius: 2em;
+	z-index: 1;
+}
+
+.movie__content {
+	padding: 0.5em 1em;
+}
+
+.movie__title {
+	font-weight: bold;
+}
+
+.movie__poster {
+	object-fit: cover;
+}
+
+.movie__link {
+	position: absolute;
+	inset: 0;
 }
 
 /* ========== Responsive ========== */
@@ -326,7 +411,8 @@ fieldset {
 		justify-content: space-between;
 	}
 
-	.header__menu {
+	.header__menu[data-state='closed'] {
+		display: flex;
 		position: static;
 		flex-direction: row;
 		padding-block: 0;
@@ -334,10 +420,6 @@ fieldset {
 
 	.header__burger {
 		display: none;
-	}
-
-	.header__menu {
-		transform: scale(1, 1);
 	}
 
 	.menu__link {
