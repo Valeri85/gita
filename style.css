@@ -3,6 +3,7 @@
 	2. Reset
 	3. Utils
 		3.1 Accessibility
+		3.2 Movies List
 	4. Animations
 		4.1 Navigation Menu
 	5. Header
@@ -15,6 +16,7 @@
 		6.5 Movies
 		6.6 Movie Card
 	7. Footer
+	8. Movies Page
 	Responsive
 */
 
@@ -158,6 +160,16 @@ li::marker {
 	clip: rect(0 0 0 0);
 	clip-path: inset(50%);
 }
+
+/* 3.2 Movies List */
+
+.movies__list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 1em;
+}
+
 /* =========== 4. Animations =========  */
 
 /* 4.1 Navigation Menu */
@@ -357,7 +369,7 @@ li::marker {
 
 /* 6.4 Movies */
 
-.movies__list {
+.movies__list[data-active-list='false'] {
 	display: none;
 }
 
@@ -417,6 +429,30 @@ li::marker {
 	padding: 1em;
 	border-top: 1px solid black;
 	text-align: center;
+}
+
+/* ========== 8. Movies Page ========== */
+
+.movies-page {
+	padding: 2em;
+}
+
+.movies-page__section {
+	padding-block: 2em;
+}
+
+.movies-page__title {
+	text-align: center;
+	margin-block: 1em;
+	font-size: 3rem;
+}
+
+/* ========== 8. TV Shows ========== */
+
+.tv-shows-page__title {
+	text-align: center;
+	margin-block: 1em;
+	font-size: 3rem;
 }
 
 /* ========== Responsive ========== */

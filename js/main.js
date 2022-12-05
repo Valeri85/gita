@@ -1,10 +1,10 @@
 // Header
 
 const header = document.getElementById('header');
-const moviesPage = document.getElementById('main-page');
+const mainPage = document.getElementById('main-page');
 
 const headerHeight = header.getBoundingClientRect().height;
-moviesPage.style.paddingTop = `${headerHeight}px`;
+mainPage.style.paddingTop = `${headerHeight}px`;
 
 /*------------------------------------------------------------------------------*/
 
@@ -37,15 +37,16 @@ function closeNavMenu() {
 
 // Movies
 
-const categoriesSection = moviesPage.querySelector('#main-page-categories');
+const categoriesSection = mainPage.querySelector('#main-page-categories');
 
 const API_KEY = '4f70fbbd83d33d1c2444b3928bc7b1df';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const IMAGE_PATH = 'https://image.tmdb.org/t/p/w1280';
 const MOVIES_URL = `${BASE_URL}/movie`;
+
 const TOP_RATED_MOVIES = `${MOVIES_URL}/top_rated?api_key=${API_KEY}&language=en-US&page=1`;
 const UPCOMING_MOVIES = `${MOVIES_URL}/upcoming?api_key=${API_KEY}&language=en-US&page=1`;
-const POPULAR_MOVIES = `${MOVIES_URL}/popular?api_key=${API_KEY}&language=en-US&page=1`;
+const LATEST_MOVIES = `${MOVIES_URL}/now_playing?api_key=${API_KEY}&language=en-US&page=1`;
 
 async function getMovies(url) {
 	try {
@@ -141,12 +142,12 @@ async function showUpcomingMovies() {
 	categoriesSection.appendChild(ul);
 }
 
-// Popular
-async function showPopularMovies() {
-	const moviesData = await getMovies(POPULAR_MOVIES);
+// Latest
+async function showNowPlayingMovies() {
+	const moviesData = await getMovies(LATEST_MOVIES);
 
 	const ul = document.createElement('ul');
-	ul.classList.add('movies__list', 'movies__list--popular');
+	ul.classList.add('movies__list', 'movies__list--now-playing');
 	ul.setAttribute('id', 'movies-list');
 	ul.setAttribute('data-active-list', 'false');
 
@@ -191,13 +192,14 @@ const categoriesTabs = categoriesSection.querySelectorAll('#categories-tab');
 categoriesTabsContainer.addEventListener('click', async event => {
 	const categoriesLists = categoriesSection.querySelectorAll('#movies-list');
 	const upcomingMoviesList = categoriesSection.querySelector(`.movies__list--upcoming`);
-	const popularMoviesList = categoriesSection.querySelector(`.movies__list--popular`);
+	const nowPlayingMoviesList = categoriesSection.querySelector(`.movies__list--now-playing`);
 	const clickedCategoryTab = event.target.closest('#categories-tab');
 
 	if (!clickedCategoryTab) return;
 
 	if (clickedCategoryTab.dataset.category === 'upcoming' && upcomingMoviesList == null) await showUpcomingMovies();
-	if (clickedCategoryTab.dataset.category === 'popular' && popularMoviesList == null) await showPopularMovies();
+	if (clickedCategoryTab.dataset.category === 'now-playing' && nowPlayingMoviesList == null)
+		await showNowPlayingMovies();
 
 	categoriesTabs.forEach(tab => tab.setAttribute('data-active-tab', 'false'));
 	categoriesLists.forEach(content => content.setAttribute('data-active-list', 'false'));
