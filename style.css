@@ -299,7 +299,7 @@ li::marker {
 /* ========== 6. Main ========== */
 
 .page {
-	padding: 0 var(--padding);
+	padding: 0 var(--padding) var(--padding);
 }
 
 .page__title {
@@ -347,7 +347,7 @@ li::marker {
 .main-page__categories {
 	display: grid;
 	place-content: center;
-	padding-block: 4em;
+	padding-top: 4em;
 }
 
 .categories__tabs {

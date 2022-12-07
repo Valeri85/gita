@@ -5,7 +5,7 @@ const peoplePage = document.querySelector('[data-page="people"]');
 
 // Discover Movies
 async function showPopularPeople() {
-	const personsData = await getAPIData(POPULAR_PEOPLE);
+	const persons = await getAPIData(POPULAR_PEOPLE);
 
 	const section = document.createElement('section');
 	section.classList.add('tv-shows-page__section');
@@ -13,7 +13,7 @@ async function showPopularPeople() {
 	ul.classList.add('cards__list');
 	ul.setAttribute('id', 'cards-list');
 
-	personsData.forEach(personData => {
+	persons.forEach(person => {
 		ul.insertAdjacentHTML(
 			'beforeend',
 			`
@@ -21,14 +21,14 @@ async function showPopularPeople() {
 				<article class="card">
 					<img 
 						class="card__poster"
-						src="${IMAGE_PATH}${personData.profile_path}"
+						src="${IMAGE_PATH}${person.profile_path}"
 						width='150'
 						height='200'
 						alt=""
 					/>
 					<a class="card__link" href="#" aria-label="Go To Details"></a>
 					<div class="card__content">
-						<h2 class="card__title">${personData.name}</h2>
+						<h2 class="card__title">${person.name}</h2>
 					</div>
 				</article>
 			</li>

@@ -1,5 +1,5 @@
-import { TOP_RATED_MOVIES, UPCOMING_MOVIES, NOW_PLAYING_MOVIES, IMAGE_PATH } from './constants.js';
-import { getAPIData } from './service.js';
+import { NOW_PLAYING_MOVIES, TOP_RATED_MOVIES, UPCOMING_MOVIES } from './constants.js';
+import { createCard } from './helper.js';
 
 const categoriesSection = document.querySelector('#main-page-categories');
 const categoriesTabsContainer = categoriesSection.querySelector('#categories-tabs-container');
@@ -30,120 +30,36 @@ categoriesTabsContainer.addEventListener('click', async event => {
 
 // Top Rated
 async function showTopRatedMovies() {
-	const movies = await getAPIData(TOP_RATED_MOVIES);
-
 	const ul = document.createElement('ul');
 	ul.classList.add('cards__list', 'cards__list--top-rated');
 	ul.setAttribute('id', 'cards-list');
 	ul.setAttribute('data-active-list', 'true');
 
-	movies.forEach(movie => {
-		const dateTimeAttr = new Date(movie.release_date).toISOString();
-		const date = new Date(movie.release_date).toDateString().slice('4');
-
-		ul.insertAdjacentHTML(
-			'beforeend',
-			`
-			<li class="cards__list-item">
-				<article class="card">
-					<small class="card__budge">${movie.vote_average}</small>
-					<img 
-						class="card__poster"
-						src="${IMAGE_PATH}${movie.poster_path}"
-						width='200px'
-						height='200px'
-						alt=""
-					/>
-					<a class="card__link" href="#" aria-label="Go To Details"></a>
-					<div class="card__content">
-						<h2 class="card__title">${movie.original_title}</h2>
-						<time class="card__date" datetime=${dateTimeAttr}>${date}</time>
-					</div>
-				</article>
-			</li>
-			`
-		);
-	});
+	await createCard(ul, TOP_RATED_MOVIES);
 
 	categoriesSection.appendChild(ul);
 }
 
 // Upcoming
 async function showUpcomingMovies() {
-	const movies = await getAPIData(UPCOMING_MOVIES);
-
 	const ul = document.createElement('ul');
 	ul.classList.add('cards__list', 'cards__list--upcoming');
 	ul.setAttribute('id', 'cards-list');
 	ul.setAttribute('data-active-list', 'false');
 
-	movies.forEach(movie => {
-		const dateTimeAttr = new Date(movie.release_date).toISOString();
-		const date = new Date(movie.release_date).toDateString().slice('4');
-
-		ul.insertAdjacentHTML(
-			'beforeend',
-			`
-			<li class="cards__list-item">
-				<article class="card">
-					<small class="card__budge">${movie.vote_average}</small>
-					<img 
-						class="card__poster"
-						src="${IMAGE_PATH}${movie.poster_path}"
-						width='200px'
-						height='200px'
-						alt=""
-					/>
-					<a class="card__link" href="#" aria-label="Go To Details"></a>
-					<div class="card__content">
-						<h2 class="card__title">${movie.original_title}</h2>
-						<time class="card__date" datetime=${dateTimeAttr}>${date}</time>
-					</div>
-				</article>
-			</li>
-			`
-		);
-	});
+	await createCard(ul, UPCOMING_MOVIES);
 
 	categoriesSection.appendChild(ul);
 }
 
 // Now Playing
 async function showNowPlayingMovies() {
-	const movies = await getAPIData(NOW_PLAYING_MOVIES);
-
 	const ul = document.createElement('ul');
 	ul.classList.add('cards__list', 'cards__list--now-playing');
 	ul.setAttribute('id', 'cards-list');
 	ul.setAttribute('data-active-list', 'false');
 
-	movies.forEach(movie => {
-		const dateTimeAttr = new Date(movie.release_date).toISOString();
-		const date = new Date(movie.release_date).toDateString().slice('4');
-
-		ul.insertAdjacentHTML(
-			'beforeend',
-			`
-			<li class="cards__list-item">
-				<article class="card">
-					<small class="card__budge">${movie.vote_average}</small>
-					<img 
-						class="card__poster"
-						src="${IMAGE_PATH}${movie.poster_path}"
-						width='150'
-						height='200'
-						alt=""
-					/>
-					<a class="card__link" href="#" aria-label="Go To Details"></a>
-					<div class="card__content">
-						<h2 class="card__title">${movie.original_title}</h2>
-						<time class="card__date" datetime=${dateTimeAttr}>${date}</time>
-					</div>
-				</article>
-			</li>
-			`
-		);
-	});
+	await createCard(ul, NOW_PLAYING_MOVIES);
 
 	categoriesSection.appendChild(ul);
 }
