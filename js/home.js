@@ -48,31 +48,35 @@ async function showNowPlayingMovies() {
 
 // Search
 
-const searchInput = document.getElementById('search-input');
+const searchSection = document.getElementById('search-section');
+const searchInput = searchSection.querySelector('#search-input');
 
 searchInput.addEventListener('input', async event => {
-	const searchResults = document.getElementById('search-results');
-
 	try {
-		setTimeout(() => {
-			console.log('first');
-		}, 1000);
+		const { value } = event.target;
+		const searchResults =
+			searchSection.querySelector('#search-results') ??
+			searchSection.insertAdjacentHTML('beforeend', `<ul class="main-page__search-results" id="search-results"></ul>`);
 
-		const response = await fetch(
-			`https://api.themoviedb.org/3/search/multi?api_key=4f70fbbd83d33d1c2444b3928bc7b1df&language=en-US&query=${event.target.value}&page=1&include_adult=true`
-		);
+		if (value !== '') {
+			const response = await fetch(
+				`https://api.themoviedb.org/3/search/multi?api_key=4f70fbbd83d33d1c2444b3928bc7b1df&language=en-US&query=${value}&page=1&include_adult=true`
+			);
 
-		if (!response.ok) throw new Error('Something went wrong!');
+			if (!response.ok) throw new Error('Something went wrong!');
 
-		const data = await response.json();
+			const data = await response.json();
 
-		console.log(data);
-		// return data.results;
+			searchSection.querySelector('#search-results').innerHTML = JSON.stringify(data);
+		}
+
+		if (value === '') {
+			searchResults.innerHTML = '';
+			searchSection.removeChild(searchResults);
+		}
 	} catch (error) {
 		console.error(error);
 	}
-
-	console.log(searchResults);
 });
 
 /* ------------------------------------------------------------------ */

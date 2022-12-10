@@ -71,7 +71,7 @@
 		<!-- Main Strat -->
 		<main class="page" id="page" data-page="home">
 			<!-- Search Section Start -->
-			<section class="main-page__search-section">
+			<section class="main-page__search-section" id="search-section">
 				<!-- Main Title Start -->
 				<h1 class="main-page__title">Welcome<span class="visually-hidden">on MovieDB website</span></h1>
 				<!-- Main Title End -->
@@ -81,14 +81,16 @@
 					<fieldset class="form__fieldset">
 						<legend>Millions of movies, TV shows and people to discover. Explore now.</legend>
 						<label class="visually-hidden" for="search">Search for a movie, tv show, person...</label>
-						<input class="form__search" id="search-input" type="search" placeholder="Search for a movie, tv show, person..." />
+						<input
+							class="form__search"
+							id="search-input"
+							type="search"
+							placeholder="Search for a movie, tv show, person..."
+							autocomplete="off"
+						/>
 					</fieldset>
 				</form>
 				<!-- Search Field End -->
-
-				<!-- Search Results Start -->
-				<ul class="main-page__search-results" id="search-results"></ul>
-				<!-- Search Results End -->
 			</section>
 			<!-- Search Section End -->
 

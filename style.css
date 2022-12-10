@@ -45,9 +45,11 @@
 	--padding: clamp(1em, 0.7143rem + 0.8929vw, 2em);
 
 	/* Animations */
-	--animation-duration-100: 150ms;
 	--animation-duration-400: 500ms;
 	--animation-duration-500: 700ms;
+
+	/* Dealy */
+	--animation-delay-500: 700ms;
 }
 
 /* ========== 2. Reset ========== */
@@ -184,7 +186,7 @@ li::marker {
 	background-color: var(--clr-primary-400);
 	font-weight: var(--fw-bold);
 	box-shadow: var(--shadow);
-	z-index: 2;
+	z-index: 3;
 }
 
 /* 5.1 Header Burger */
@@ -297,8 +299,9 @@ li::marker {
 .main-page__search-section {
 	display: grid;
 	place-content: center;
+	position: relative;
 	margin-inline: calc(var(--padding) * -1);
-	padding: 3em;
+	padding: var(--padding);
 	background-color: var(--clr-primary-300);
 	color: var(--clr-primary-100);
 }
@@ -324,6 +327,21 @@ li::marker {
 	padding: 0.5em 1.5em;
 	border: 0;
 	border-radius: 50px;
+}
+
+/* 6.2 Search Results */
+
+.main-page__search-results {
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	max-width: calc(100% - calc(var(--padding) * 4));
+	margin-inline: var(--padding);
+	padding: var(--padding);
+	background-color: var(--clr-primary-100);
+	color: var(--clr-primary-400);
+	transform: translateX(calc(-50% - var(--padding)));
+	z-index: 2;
 }
 
 /* 6.3 Tabs */
