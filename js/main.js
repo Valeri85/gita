@@ -15,7 +15,6 @@ const headerNavMenu = header.querySelector('#primary-navigation-menu');
 
 headerBurgerButton.addEventListener('click', () => {
 	const isOpened = headerBurgerButton.getAttribute('aria-expanded') === 'true';
-
 	isOpened ? closeNavMenu() : openNavMenu();
 });
 
@@ -27,7 +26,6 @@ function openNavMenu() {
 function closeNavMenu() {
 	headerBurgerButton.setAttribute('aria-expanded', 'false');
 	headerNavMenu.setAttribute('data-state', 'closing');
-
 	headerNavMenu.addEventListener('animationend', () => headerNavMenu.setAttribute('data-state', 'closed'), {
 		once: true,
 	});

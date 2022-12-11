@@ -1,16 +1,6 @@
 import { IMAGE_PATH } from './constants.js';
 import { getAPIData } from './service.js';
 
-// Cards List
-export function createCardsList(className, isActive) {
-	const Cardslist = document.createElement('ul');
-	Cardslist.classList.add('cards__list', `cards__list--${className}`);
-	Cardslist.setAttribute('id', 'cards-list');
-	Cardslist.setAttribute('data-active-list', `${isActive}`);
-
-	return Cardslist;
-}
-
 // Card
 export async function createCard(page, element, url) {
 	const datas = await getAPIData(url);
@@ -27,6 +17,7 @@ export async function createCard(page, element, url) {
               src="${IMAGE_PATH}${data.profile_path ?? data.poster_path}"
               width='200px'
               height='200px'
+              loading="lazy"
               alt=""
             />
             <a class="card__link" href="#" aria-label="Go To Details"></a>

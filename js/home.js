@@ -1,10 +1,12 @@
-import { NOW_PLAYING_MOVIES, TOP_RATED_MOVIES, UPCOMING_MOVIES, SEARCH } from './constants.js';
-import { createCard, createCardsList } from './helper.js';
+import { API_KEY, NOW_PLAYING_MOVIES, SEARCH_URL, TOP_RATED_MOVIES, UPCOMING_MOVIES } from './constants.js';
+import { createCard } from './createCard.js';
+import { createCardsList } from './createCardsList.js';
+import { getAPIData } from './service.js';
 
+// Tabs
 const categoriesSection = document.querySelector('#main-page-categories');
 const categoriesTabsContainer = categoriesSection.querySelector('#categories-tabs-container');
 
-// Tabs
 categoriesTabsContainer.addEventListener('click', async event => {
 	const categoriesTabs = categoriesSection.querySelectorAll('#categories-tab');
 	const categoriesCardsLists = categoriesSection.querySelectorAll('#cards-list');
@@ -47,36 +49,34 @@ async function showNowPlayingMovies() {
 }
 
 // Search
-
 const searchSection = document.getElementById('search-section');
 const searchInput = searchSection.querySelector('#search-input');
 
-searchInput.addEventListener('input', async event => {
-	try {
-		const { value } = event.target;
-		const searchResults =
-			searchSection.querySelector('#search-results') ??
-			searchSection.insertAdjacentHTML('beforeend', `<ul class="main-page__search-results" id="search-results"></ul>`);
+let searchTimeout = 0;
 
-		if (value !== '') {
-			const response = await fetch(
-				`https://api.themoviedb.org/3/search/multi?api_key=4f70fbbd83d33d1c2444b3928bc7b1df&language=en-US&query=${value}&page=1&include_adult=true`
-			);
+searchInput.addEventListener('keyup', event => {
+	const { value } = event.target;
 
-			if (!response.ok) throw new Error('Something went wrong!');
+	// Create results if keydown event (value) is only characters
+	let searchResults =
+		searchSection.querySelector('#search-results') ??
+		searchSection.insertAdjacentHTML('beforeend', `<ul class="main-page__search-results" id="search-results"></ul>`);
 
-			const data = await response.json();
+	clearTimeout(searchTimeout);
 
-			searchSection.querySelector('#search-results').innerHTML = JSON.stringify(data);
-		}
+	if (value !== '') {
+		searchResults = searchSection.querySelector('#search-results');
 
-		if (value === '') {
-			searchResults.innerHTML = '';
-			searchSection.removeChild(searchResults);
-		}
-	} catch (error) {
-		console.error(error);
+		searchTimeout = setTimeout(async () => {
+			const searchData = await getAPIData(`${SEARCH_URL}api_key=${API_KEY}&language=en-US&query=${value}&page=1&include_adult=true`);
+
+			console.log(searchData);
+
+			searchResults.innerHTML = JSON.stringify(searchData);
+		}, 1000);
 	}
+
+	if (value === '') searchSection.removeChild(searchResults);
 });
 
 /* ------------------------------------------------------------------ */
