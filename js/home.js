@@ -55,28 +55,41 @@ const searchInput = searchSection.querySelector('#search-input');
 let searchTimeout = 0;
 
 searchInput.addEventListener('keyup', event => {
-	const { value } = event.target;
+	let { value } = event.target;
 
-	// Create results if keydown event (value) is only characters
-	let searchResults =
-		searchSection.querySelector('#search-results') ??
+	let searchResultsList =
+		(searchSection.querySelector('#search-results') && event.keyCode > 47 && event.keyCode < 91) ??
 		searchSection.insertAdjacentHTML('beforeend', `<ul class="main-page__search-results" id="search-results"></ul>`);
 
 	clearTimeout(searchTimeout);
 
 	if (value !== '') {
-		searchResults = searchSection.querySelector('#search-results');
+		searchResultsList = searchSection.querySelector('#search-results');
 
 		searchTimeout = setTimeout(async () => {
-			const searchData = await getAPIData(`${SEARCH_URL}api_key=${API_KEY}&language=en-US&query=${value}&page=1&include_adult=true`);
+			const searchResults = await getAPIData(`${SEARCH_URL}api_key=${API_KEY}&language=en-US&query=${value}&page=1&include_adult=true`);
 
-			console.log(searchData);
-
-			searchResults.innerHTML = JSON.stringify(searchData);
+			searchResults.forEach(searchResult => {
+				const { original_title, media_type, name } = searchResult;
+				console.log(searchResult);
+				searchResultsList.insertAdjacentHTML(
+					'afterbegin',
+					`
+						<li class="main-page__search-result">
+							<img src='../images/${media_type === 'movie' ? 'movie' : media_type === 'tv' ? 'tv' : 'people'}.svg' 
+									width='17.5' height:'17.5' aria-hodden='true' />
+							<p>
+								<a href='#'>${media_type === 'movie' ? original_title : name}</a>
+								<small> - in ${media_type}</small>
+							</p>
+						</li>
+					`
+				);
+			});
 		}, 1000);
 	}
 
-	if (value === '') searchSection.removeChild(searchResults);
+	if (value === '') searchSection.removeChild(searchSection.querySelector('#search-results'));
 });
 
 /* ------------------------------------------------------------------ */

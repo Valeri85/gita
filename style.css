@@ -29,7 +29,9 @@
 	--fw-bold: 700;
 
 	/* Background Colors */
+	--clr-primary-50: hsl(0, 0%, 100%);
 	--clr-primary-100: hsl(0, 0%, 90%);
+	--clr-primary-200: hsl(0, 0%, 60%);
 	--clr-primary-300: hsl(201, 96%, 20%);
 	--clr-primary-400: hsl(278, 68%, 11%);
 
@@ -329,19 +331,59 @@ li::marker {
 	border-radius: 50px;
 }
 
+/* clears the ‘X’ from Internet Explorer */
+input[type='search']::-ms-clear {
+	display: none;
+	width: 0;
+	height: 0;
+}
+input[type='search']::-ms-reveal {
+	display: none;
+	width: 0;
+	height: 0;
+}
+/* clears the ‘X’ from Chrome */
+input[type='search']::-webkit-search-decoration,
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-results-button,
+input[type='search']::-webkit-search-results-decoration {
+	display: none;
+}
+
 /* 6.2 Search Results */
 
 .main-page__search-results {
 	position: absolute;
 	top: 100%;
 	left: 50%;
-	max-width: calc(100% - calc(var(--padding) * 4));
-	margin-inline: var(--padding);
-	padding: var(--padding);
-	background-color: var(--clr-primary-100);
+	width: calc(100% - calc(var(--padding) * 2));
+	max-width: 500px;
+	height: 300px;
+	padding: 0.5em var(--padding);
+	background-color: var(--clr-primary-50);
+	border-radius: 1em;
 	color: var(--clr-primary-400);
-	transform: translateX(calc(-50% - var(--padding)));
+	box-shadow: var(--shadow);
+	transform: translateX(-50%);
+	overflow-y: scroll;
 	z-index: 2;
+}
+
+.main-page__search-result {
+	display: flex;
+	gap: 0.5em;
+	padding: 0.25em 0.75em;
+	border-bottom: 1px dotted var(--clr-primary-400);
+}
+
+.main-page__search-result a {
+	color: var(--clr-primary-400);
+}
+
+.main-page__search-result small {
+	font-size: 1.5rem;
+	color: var(--clr-primary-200);
+	text-transform: capitalize;
 }
 
 /* 6.3 Tabs */
