@@ -1,5 +1,5 @@
 import { POPULAR_TV_SHOWS } from './constants.js';
-import { createCard } from './helper.js';
+import { createCard } from './createCard.js';
 
 // Discover Movies
 async function showPopularTvShows() {

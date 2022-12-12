@@ -1,6 +1,5 @@
-import { POPULAR_PEOPLE, IMAGE_PATH } from './constants.js';
-import { createCard } from './helper.js';
-import { getAPIData } from './service.js';
+import { POPULAR_PEOPLE } from './constants.js';
+import { createCard } from './createCard.js';
 
 // Discover Movies
 async function showPopularPeople() {

@@ -7,6 +7,7 @@ import { getAPIData } from './service.js';
 const categoriesSection = document.querySelector('#main-page-categories');
 const categoriesTabsContainer = categoriesSection.querySelector('#categories-tabs-container');
 
+// Click Event
 categoriesTabsContainer.addEventListener('click', async event => {
 	const categoriesTabs = categoriesSection.querySelectorAll('#categories-tab');
 	const categoriesCardsLists = categoriesSection.querySelectorAll('#cards-list');
@@ -51,9 +52,14 @@ async function showNowPlayingMovies() {
 // Search
 const searchSection = document.getElementById('search-section');
 const searchInput = searchSection.querySelector('#search-input');
+const searchForm = searchSection.querySelector('#movies-form');
+
+// Form Submit Event
+searchForm.addEventListener('submit', event => event.preventDefault());
 
 let searchTimeout = 0;
 
+// Keyup Event
 searchInput.addEventListener('keyup', event => {
 	let { value } = event.target;
 
@@ -63,6 +69,8 @@ searchInput.addEventListener('keyup', event => {
 
 	clearTimeout(searchTimeout);
 
+	searchResultsList && searchSection.querySelector('#search-results').replaceChildren('');
+
 	if (value !== '') {
 		searchResultsList = searchSection.querySelector('#search-results');
 
@@ -71,7 +79,7 @@ searchInput.addEventListener('keyup', event => {
 
 			searchResults.forEach(searchResult => {
 				const { original_title, media_type, name } = searchResult;
-				console.log(searchResult);
+
 				searchResultsList.insertAdjacentHTML(
 					'afterbegin',
 					`
@@ -86,11 +94,17 @@ searchInput.addEventListener('keyup', event => {
 					`
 				);
 			});
-		}, 1000);
+		}, 500);
 	}
 
 	if (value === '') searchSection.removeChild(searchSection.querySelector('#search-results'));
 });
+
+// Search Event
+searchInput.addEventListener(
+	'search',
+	event => event.target.value === '' && searchSection.removeChild(searchSection.querySelector('#search-results'))
+);
 
 /* ------------------------------------------------------------------ */
 
